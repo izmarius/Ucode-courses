@@ -328,3 +328,76 @@ const getMaximumSmallerNumberThanN = num => {
     return num - res / 2;
 };
 console.log(getMaximumSmallerNumberThanN(35));
+
+// 15
+const combineTwoArraysWhile = (arr1, arr2) => {
+    let arr = creatyEmptyArray(arr1.length + arr2.length); 
+    let i = 0;
+    while (i < arr.length && arr1.length) {
+        arr[i] = arr1.shift();
+        arr[i+1] = arr2.shift();
+        i += 2;
+    }
+    return arr;
+};
+console.log(combineTwoArraysWhile([1, 2, 3], [7, 8, 9]));
+
+const combineTwoArraysfor = (arr1, arr2) => {
+    let arr = creatyEmptyArray(arr1.length + arr2.length);
+    for (let i = 0; i < arr.length; i += 2) {
+        arr[i] = arr1.shift();
+        arr[i+1] = arr2.shift();
+    }
+    return arr;
+}
+console.log(combineTwoArraysfor([1, 2, 3], [7, 8, 9]));
+
+const combineTwoArraysReduce = (emptyArray, arr1, arr2) => emptyArray.reduce((emptyArray, el) => {
+    emptyArray.push(arr1.shift());
+    emptyArray.push(arr2.shift());
+    return emptyArray.filter(el => el != undefined);
+}, [])
+let arr1 = [1, 2, 3], arr2 = [7, 8, 9]; 
+let = resArray = creatyEmptyArray(arr1.length + arr2.length);
+console.log(combineTwoArraysReduce(resArray, arr1, arr2));
+
+// 16
+const isNumberPrime = num => {
+    if (!Number.isInteger(num))
+        return false;
+    if (num <= 0)
+        return false;
+    for (let i = 2; i <= Math.floor(num / 2); i++) {
+        if (num % i === 0)
+            return false;
+    }
+    return true;
+}
+console.log(isNumberPrime(11));
+
+// 17
+const getAllPrimeNumbersInInterval = (min, max) => {
+    let primeNumbers = [];
+    for (let i = min; i <= max; i++)
+        if (isNumberPrime(i))
+            primeNumbers.push(i);
+    return primeNumbers;
+}
+console.log(getAllPrimeNumbersInInterval(1, 20));
+
+// 18
+const getSumOfArray = arr => arr.length === 1 ? arr.pop() : arr.pop() + getSumOfArray(arr);
+console.log(getSumOfArray([1, 2, 3, 4]));
+
+// 19
+const getLongestWord = text => {
+    let maxChars = text.split(' ').map(el => el.length).reduce((a, b) => Math.max(a, b));
+    let indexOfLongestWord = getAllIndexesofElem(text.split(' ').map(el => el.length), maxChars);
+    return text.split(' ')[indexOfLongestWord];
+}
+let text = 'ana are mere         golden    ionatan         extraterestre mirifice';
+console.log(getLongestWord(text));
+
+// 20
+const getASquaredBModC = (a, b, c) => a === 0 || b === 0 ? Math.pow(a, b) % c : getASquaredBModC(Math.floor(a / c), Math.floor(b / c), c);
+console.log(getASquaredBModC(2, 4, 2));
