@@ -1,0 +1,31 @@
+1. WAF wr the distinct elements from an array
+2. implement a navigation back and forth mechanism
+ you have an array; ypur function "next" and "previous" willl go next one step and back one step
+ on next, if index is the last one, it will be set to 0 
+
+3. WAF which writes to the console the current date, after 2 seconds
+4. WAF which writes to the console the current date, after x seconds
+5.having an array of nummbers, print the current date to the console after x seconds
+[1,5,6], it will print the date after 1 and after that after 5 and after that after 6 sec
+6. implement double click. WAF WHICH prints to the console "double click" in case the function was triggered twice in a specific iterval
+7. count haw many calls of a function has been made in a specific interval
+
+8.WAF which returns the sum of elements from an array. (recursively)
+9. WAF which calculate the n!   --recursion
+9. WAF which returns the longest word from a proposition. use regular expression; we didn't learn but do a search
+
+
+
+
+
+
+
+
+
+Keep it for later. WAF to determine if a epression is correctly written; 
+
+(2+3)-5) is bad
+((2+3)-5) is bad
+(2+3))-5 is bad
+((2+4)-(3*(7-9))) is good
+
