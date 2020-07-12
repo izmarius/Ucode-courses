@@ -1,0 +1,50 @@
+4. let myAge = 28;
+
+5. let firstName = 'Marius';
+
+6. let lastName = 'Ionescu';
+
+7. let myBirthday = new Date(1992, 08, 24);
+
+8. let myName = firstName + ' ' + lastName;
+
+9. let myBirthYear = myBirthday.getYear();
+
+10. let isAgeOdd = (myAge % 2) != 0;
+
+11. myBirthYear = myBirthYear + 5;
+    myBirthYear += 5;
+
+12. myBirthYear = myBirthYear - 5;
+    myBirthYear -= 5;
+    - myBirthYear is at its inital value of 92
+
+13. let myGender  = 'male';
+
+14. let child1Age = 14;
+    let child2Age = 12;
+    let child3Age = 18;
+    let childMovieTicketPrice = 10;
+    let adultMovieTicketPrice = childMovieTicketPrice * 1.20;
+    let movieAgeRestriction = 13;
+    let child1Money = 10;
+    let child2Money = 8;
+    let child3Money = 9;
+    let adultMoney = 33;
+    let ignoreAgeRestriction = true;
+    
+case1:
+    let child1CanWatchMovieAlone = child1Money >= childMovieTicketPrice && child1Age >= movieAgeRestriction; -> true
+    let child2CanWatchMovieAlone = child2Money >= childMovieTicketPrice && child2Age >= movieAgeRestriction; -> false
+    let child3CanWatchMovieAlone = child3Money >= childMovieTicketPrice && child3Age >= movieAgeRestriction; -> false
+
+case2:
+   let canWatchMovie = (child1Money >= childMovieTicketPrice && child2Money >= childMovieTicketPrice && child3Money >= childMovieTicketPrice && adultMoney >= adultMovieTicketPrice) && 
+                       ((child1Age >= movieAgeRestriction && child2Age >= movieAgeRestriction && child3Age >= movieAgeRestriction) || ignoreAgeRestriction != false); -> false
+
+case3:
+   let movieTicketPriceForEveryone = childMovieTicketPrice * 3 + adultMovieTicketPrice; -> 42
+   let currentMoneyTotal = child1Money + child2Money + child3Money + adultMoney; -> 60
+   let everyoneCanWatchMovie = currentMoneyTotal >= movieTicketPriceForEveryone && 
+                               ((child1Age >= movieAgeRestriction && child2Age >= movieAgeRestriction && child3Age >= movieAgeRestriction) ||
+                               ignoreAgeRestriction != false); -> true
