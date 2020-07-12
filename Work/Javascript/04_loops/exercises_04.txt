@@ -1,0 +1,113 @@
+
+
+1. WAF which logs to the console the numbers smaller than n;  ex: show(4) ==> 0,1,2,3
+	- use for syntax
+	- use while
+	- use map
+	- use forEach
+
+2. WAF which logs to the console the numbers smaller than n only if number is even;  ex: show(4) ==> 0,2; HINT use if
+	- use for syntax
+	- use while
+	- use map
+	- use forEach  
+
+3. WAF which logs to the console the numbers smaller than n and iterating over x steps;  ex: show(20, 3) ==> 3, 6, 9, 12, 15, 18
+	- use for syntax
+	- use while
+	- use map
+	- use forEach   
+
+4. the same as exercise 2 but the inpu twill be an array
+
+5. WAF which retuns the sum of elements from an array
+	- while 
+	- for
+	-forEach
+	- reduce
+
+6. WAF which retuns the sum of elements from an array only if the value is multiple of x
+	- while 
+	- for
+	-forEach
+	- reduce
+	- filter -- here it is ok to use filter first...
+
+7. rotate an array x times
+	- use for 
+	- use while
+
+8. WAF which receive an array as input and returns another array  - every time the step will increase with 1. ex;
+	[3,6,1,8,90,23,4,21,54,2,88, 1,2,3] ==> [3, 6,  8, 4, 88]
+	- use while
+
+9. WAF which receive an array and returns the sum of numbers;
+	the element from even position will be decreased with his position
+	the element from ODD position will be INCREASED with his position
+
+	EX: [4,5,6] => (4-0) + (5+1) + (6-2) => 14
+
+	- use map
+	- use for
+	- use forEach
+	- use reduce
+
+10. WAF which returns the maximum element from an array
+- while
+- for
+- map
+
+11. WAF which returns the MINIMUM element from an array
+
+12. WAF with arr as input and returns the position of an element in array; e.g; [4,5,6,4], 6 ==> 2
+
+13. WAF with arr as input and returns ALL positions of an element in array; e.g; [4,5,6,4], 4 ==> [0,3] 
+
+14. WAF WR the maximum number smaller than n by using multiplications with 2 (starts with 1); 
+	e.g: (35) ==> 1 * 2
+		2*2 = 4
+		4*2 = 8
+		8*2=16
+		16*2 = 32
+		==> (35-32) ==> 3	
+
+
+
+15. WAF wich receive 2 arrays; combine the two arrays; ([1,2,3], [7,8,9] ) ==> [1,7,2,8,3,9]
+
+- use for, while, yu can try reduce as well
+
+16. WAF to return true if a number is prime
+
+17. WAF to return all prime numbers between min, max
+
+18. WAF which returns the sum of elements by using:
+	- get the first chracter and after that call the same function with remaining elements
+	e.g. sum([1,2,3,4]) = 1+ sum([2,3,4]) = 3 + sum([3,4])...
+
+19. WAF WR the longest word from a proposition. 
+e.g. 'ana are mere         golden    ionatan         extraterestre mirifice' ==> extraterestre
+HINT; se face remove la multiple spatii
+split in fctr de ' '
+map pe length
+aflare maxim element
+returnare valoare din array a elementului de pe pozitia maxim
+
+20. WAF WR the a^b mod c
+- this should be made with recursivity. give it a try! 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
