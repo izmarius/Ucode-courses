@@ -1,0 +1,66 @@
+- new object - literal object
+var masina = {
+	usi: 5,
+	getUsi: function() {
+		return masina.usi;
+	}
+}
+
+//JSON	
+
+
+// literal object with this
+var masina = {
+	usi: 5,
+	getUsi: function() {
+		return this.usi;
+	}
+}
+
+// example of a literal object 
+
+settings = {
+	color: 'white',
+	showHeader" true
+
+}
+
+
+// literal constructor
+function masina() {
+    this.nrUsi = 9;
+    this.change = function(x) {
+        this.nrUsi = x;
+    }
+
+    return this;
+
+}
+
+var m1 = new masina()
+
+
+// nested object
+
+var masina = {
+usi: 3,
+motor: {
+        cilindrii: 8,
+        
+    }
+};
+
+
+//  function masina1() {
+    var nrUsi = 9;
+    this.change = function(x) {
+        nrUsi = x;
+    }
+    this.getUsi = function() {
+        return nrUsi;
+    }
+
+    return this;
+
+}
+
