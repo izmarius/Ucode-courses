@@ -12,7 +12,7 @@
 
 8.WAF which returns the sum of elements from an array. (recursively)
 9. WAF which calculate the n!   --recursion
-9. WAF which returns the longest word from a proposition. use regular expression; we didn't learn but do a search
+10. WAF which returns the longest word from a proposition. use regular expression; we didn't learn but do a search
 
 
 

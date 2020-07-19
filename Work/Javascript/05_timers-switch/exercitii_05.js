@@ -37,7 +37,19 @@ const logDateAfterArrayOfSeconds = arr => arr.map(el => setTimeout(() => console
 logDateAfterArrayOfSeconds([1, 5, 10]);
 
 //6
+
 //7
+const countFunctionCall = (interval, timeout) => {
+    let count = 0;
+    let repeat = setInterval(() => {
+        count += 1;
+    }, interval);
+    setTimeout(() => {
+       clearInterval(repeat); 
+       console.log('function calls: ' + count);
+    }, timeout);
+};
+countFunctionCall(2000, 10000)
 
 // 8
 const getSum = arr => arr.length === 0 ? 0 : arr.pop() + getSum(arr);
