@@ -126,7 +126,7 @@ function Store () {
         shelfs.forEach(el => el.getProducts().forEach(el => {
             if (el.getCode() === productCode) {
                 el.changeForSale();
-                console.log('product:code,name ' + el.getCode() + ',' + el.getDescription() + ' reseerved for ' + timeout + ' minutes')
+                console.log('product:code,name ' + el.getCode() + ',' + el.getDescription() + ' reseerved for ' + timeout + ' minute(s)')
             }
             setTimeout(() => {
                 el.changeForSale();
