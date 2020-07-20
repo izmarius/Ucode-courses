@@ -58,6 +58,7 @@ function Product (description, cost, profit, shelfType) {
     this.price = this.cost + this.profit;
     this.code = (Math.random() + 1).toString(36).slice(-5);
     this.type = shelfType;
+    var forSale = false;
 
     this.getType = function () {
         return this.type;
@@ -69,6 +70,18 @@ function Product (description, cost, profit, shelfType) {
 
     this.getPrice = function () {
         return this.price;
+    }
+
+    this.getDescription = function () {
+        return this.description;
+    }
+
+    this.isForSale = function () {
+        return forSale;
+    }
+
+    this.changeForSale = function () {
+        forSale = !forSale;
     }
 }
 
@@ -82,6 +95,8 @@ function Store () {
                 return false;
             if (el.getProducts().length >= el.getAllowedProductNumbers())
                 return false;
+            if (el.getType() !== 'presentation')
+                product.changeForSale();
             el.getProducts().push(product);
         })
     }
@@ -95,12 +110,28 @@ function Store () {
     }
 
     this.sellProduct = function (productCode) {
-        shelfs.forEach(el => el.getProducts().myfilter(el => {
+        shelfs.forEach(el => el.getProducts().filter(el => {
             if (el.getCode() !== productCode)
                 return false;
+            if (!el.isForSale())
+                return false;
             soldProducts.push(el);
+            el.changeForSale();
             return true;
         }));
+    }
+
+    this.reserveProduct = function (productCode) {
+        var timeout = 1; //minutes
+        shelfs.forEach(el => el.getProducts().forEach(el => {
+            if (el.getCode() === productCode) {
+                el.changeForSale();
+                console.log('product:code,name ' + el.getCode() + ',' + el.getDescription() + ' reseerved for ' + timeout + ' minutes')
+            }
+            setTimeout(() => {
+                el.changeForSale();
+            }, timeout * 60 * 1000)
+        }))
     }
 
     this.addShelf = function (newShelf) {
@@ -123,16 +154,16 @@ let s4 = new Shelf('orange', 60, 'clothes', 40);
 let s5 = new Shelf('white', 100, 'presentation', 2);
 
 let basketball = new Product('basketball', 10, 5, 'sport');
-let boxinggloves = new Product('boxingGloves', 10, 4, 'sport');
+let boxingGloves = new Product('boxingGloves', 10, 4, 'sport');
 let stuffedBear = new Product('stuffedBear', 8, 3, 'toys');
 let ring = new Product('ring', 50, 13, 'jewelry');
 let hoodie = new Product('hoodie', 15, 7, 'clothes');
 let bicycle = new Product('bicycle', 0, 0, 'presentation');
 let car = new Product('car', 0, 0, 'presentation');
 
-let store1 = new Store();
+const store1 = new Store();
 store1.receiveProduct(basketball);
-store1.receiveProduct(boxinggloves);
+store1.receiveProduct(boxingGloves);
 store1.receiveProduct(stuffedBear);
 store1.receiveProduct(ring);
 store1.receiveProduct(hoodie);
@@ -143,7 +174,15 @@ console.log(store1.getShelfs().map(el => el.getProducts()));
 console.log(store1.getSumOfAllProducts());
 console.log(store1.getSumPerEachCategory());
 
+store1.reserveProduct(store1.getShelfs()[0].getProducts()[0].getCode());
+
 // sell a prodduct, I chose one exsiting code because they are generated random
-store1.sellProduct(store1.getShelfs()[0].getProducts()[0].getCode());
+store1.sellProduct(store1.getShelfs()[0].getProducts()[1].getCode());
 console.log(store1.getSoldProducts());
 console.log(store1.getShelfs().map(el => el.getProducts()));
+console.log(store1.getShelfs()[0].getProducts()[0].isForSale());
+
+// 3
+const store2 = store1;
+
+console.log(store2.getShelfs().map(el => el.getProducts()));
