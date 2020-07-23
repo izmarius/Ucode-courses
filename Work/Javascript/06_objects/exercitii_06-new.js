@@ -75,6 +75,7 @@ function Shelf (allowedProductNumbers) {
     this.type = shelfType.notSet;
     this.settings = settings;
     this.allowedProductNumbers = allowedProductNumbers;
+    this.products = [];
 
     this.getId = function () {
         return this.id;
@@ -87,6 +88,25 @@ function Shelf (allowedProductNumbers) {
 
     this.setAllowedProductNumbers = function (n) {
         this.allowedProductNumbers = n;
+    }
+}
+
+function Product (name, cost, profit) {
+    this.name = name;
+    this.id = helper.getRandomString();
+    this.price = cost + profit;
+    this.type = shelfType.notSet;
+
+    this.getId = function () {
+        return this.id;
+    }
+
+    this.getCost = function () {
+        return cost;
+    }
+
+    this.setCost = function (newCost) {
+        cost = newCost;
     }
 }
 
@@ -108,18 +128,53 @@ function Store () {
                 return false;
             }
             this.shelfs.filter(el => el.getShelfById(shelf.id))[0].setAllowedProductNumbers(newAllowedProductNumbers);
+        },
+
+        chageShelfsColor: function (newColor) {
+            settings.setColor(newColor);
+        },
+
+        changeShelfsLightIntensity: function (newLightIntensity) {
+            settings.setLightIntensity(newLightIntensity);
+        },
+
+        productService : {
+            addProduct: (shelf, product) => {
+                this.shelfService.shelfs.forEach(el => {
+                    if (el.getId() !== shelf.id)
+                        return false;
+                    if (el.products.length > el.allowedProductNumbers)
+                        return false;
+                    product.type = shelf.type
+                    el.products.push(product);
+                })
+            }
         }
     };
-    this.prodcutService = {};
 }
 var s1 = new Shelf(5);
+s1.type = shelfType.sport;
 var s2 = new Shelf(5);
+s2.type = shelfType.toys;
 var s3 = new Shelf(3);
+s3.type = shelfType.jewelry;
 var s4 = new Shelf(10);
+s4.type = shelfType.clothes;
 var s5 = new Shelf(2);
+s5.type = shelfType.presentation;
 var s8 = '';
 
+var basketball = new Product('basketball', 10, 3);
+var teddyBear = new Product('teddyBear', 5, 2);
 
 var store1 = new Store();
-store1.shelfService.updateShelf(s8, 20);
+
+store1.shelfService.updateShelf(s1, 20);
+store1.shelfService.chageShelfsColor('red');
+store1.shelfService.changeShelfsLightIntensity(80);
+
+store1.shelfService.productService.addProduct(s1, basketball)
+store1.shelfService.productService.addProduct(s2, teddyBear)
+
+
 console.log(store1);
