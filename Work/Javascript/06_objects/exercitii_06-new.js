@@ -96,6 +96,7 @@ function Product (name, cost, profit) {
     this.id = helper.getRandomString();
     this.price = cost + profit;
     this.type = shelfType.notSet;
+    this.isRserved = false;
 
     this.getId = function () {
         return this.id;
@@ -105,9 +106,14 @@ function Product (name, cost, profit) {
         return cost;
     }
 
-    this.setCost = function (newCost) {
-        cost = newCost;
+    this.getProfit = function () {
+        return profit;
     }
+
+    this.setPrice = function (newPrice) {
+        this.price = newPrice;
+    }
+
 }
 
 function Store () {
@@ -139,15 +145,56 @@ function Store () {
         },
 
         productService : {
+            soldProducts: [],
+
             addProduct: (shelf, product) => {
                 this.shelfService.shelfs.forEach(el => {
                     if (el.getId() !== shelf.id)
                         return false;
-                    if (el.products.length > el.allowedProductNumbers)
+                    if (el.products.length >= el.allowedProductNumbers)
                         return false;
                     product.type = shelf.type
                     el.products.push(product);
                 })
+            },
+
+            removeProduct: (product) => {
+                this.shelfService.shelfs.map(el => el.products = el.products.filter(el => el.id !== product.id));
+            },
+
+            updateProduct: (product, newPrice) => {
+                this.shelfService.shelfs.forEach(el => el.products.forEach(el => {
+                    if (el.getId() === product.id) 
+                        el.setPrice(newPrice)                 
+                }))
+            },
+
+            getSumOfProducts: () => {
+                return this.shelfService.shelfs.reduce(((acc, el) => acc += el.products.reduce(((acc, el) => acc += el.price), 0)), 0)
+            },
+
+            getSumOfProcustsPerCategory: () => {
+                return this.shelfService.shelfs.map(el => el.products.reduce(((acc, el) => acc += el.price), 0))
+            },
+
+            sellProduct: (product) => {
+                this.shelfService.shelfs.forEach(el => el.products.reduce(((acc, el) => {
+                    if (el.getId() !== product.id)
+                        return false;
+                    if (product.type === 'presentation')
+                        return false;
+                    if (el.isRserved)
+                        return false;
+                    this.shelfService.productService.soldProducts.push(el);
+                    this.shelfService.productService.removeProduct(el);
+                }), []))
+            },
+
+            reservProduct: (product) => {
+                this.shelfService.shelfs.forEach(el => el.products.forEach(el => {
+                    if (el.getId() === product.id) 
+                        setTimeout(() => el.isRserved = true, 10000)
+                }))
             }
         }
     };
@@ -166,6 +213,13 @@ var s8 = '';
 
 var basketball = new Product('basketball', 10, 3);
 var teddyBear = new Product('teddyBear', 5, 2);
+var boxingGloves = new Product('boxingGloves', 10, 4);
+var stuffedBear = new Product('stuffedBear', 8, 3);
+var ring = new Product('ring', 50, 13);
+var hoodie = new Product('hoodie', 15, 7);
+var bicycle = new Product('bicycle', 0, 0);
+var car = new Product('car', 0, 0);
+var p1 = '';
 
 var store1 = new Store();
 
@@ -173,8 +227,22 @@ store1.shelfService.updateShelf(s1, 20);
 store1.shelfService.chageShelfsColor('red');
 store1.shelfService.changeShelfsLightIntensity(80);
 
-store1.shelfService.productService.addProduct(s1, basketball)
-store1.shelfService.productService.addProduct(s2, teddyBear)
+store1.shelfService.productService.addProduct(s1, basketball);
+store1.shelfService.productService.addProduct(s1, boxingGloves);
+store1.shelfService.productService.addProduct(s2, teddyBear);
+store1.shelfService.productService.addProduct(s2, stuffedBear);
+store1.shelfService.productService.addProduct(s3, ring);
+store1.shelfService.productService.addProduct(s4, hoodie);
+store1.shelfService.productService.addProduct(s5, car);
+store1.shelfService.productService.addProduct(s5, bicycle);
 
+//debugger
+store1.shelfService.productService.sellProduct(basketball);
+store1.shelfService.productService.reservProduct(ring);
+
+console.log(store1.shelfService.productService.getSumOfProducts());
+console.log(store1.shelfService.productService.getSumOfProcustsPerCategory());
+
+console.log(store1.shelfService.productService.soldProducts);
 
 console.log(store1);
