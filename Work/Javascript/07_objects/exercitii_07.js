@@ -35,36 +35,84 @@
 
 
 // 1
-var createUUID = () => {
-    var dt = new Date().getTime();
-    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-        var r = (dt + Math.random() * 16) % 16 | 0;
-        dt = Math.floor(dt / 16);
-        return (c =='x' ? r : (r & 0x3 | 0x8)).toString(16);
-    });
-    return uuid;
+var helper = {
+    createUUID: () => {
+        var dt = new Date().getTime();
+        var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+            var r = (dt + Math.random() * 16) % 16 | 0;
+            dt = Math.floor(dt / 16);
+            return (c =='x' ? r : (r & 0x3 | 0x8)).toString(16);
+        });
+        return uuid;
+    },
+    
+    getArrayOfObjectsWith49RandomStrings: () => {
+        var arr = [];
+        for (let i = 1; i <= 49; i++) 
+            arr.push({number: i, code: helper.createUUID()});
+        return arr;
+    },
+    
+    sortArrayOfObjects: (arr) => {
+        for (let i = 0; i < arr.length - 1; i++)
+            for (let j = i + 1; j < arr.length; j++) 
+                if (arr[i].code < arr[j].code) {
+                    var aux = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = aux;
+                }
+    },
+    
+    get6RandomNumbersOf49: () => {
+        var arr = helper.getArrayOfObjectsWith49RandomStrings();
+        helper.sortArrayOfObjects(arr);
+        return arr.splice(0, 6).map(el => el.number);
+    }
 }
 
-var getArrayOfObjectsWith49RandomStrings = () => {
-    var arr = [];
-    for (let i = 1; i <= 49; i++) 
-        arr.push({number: i, code: createUUID()});
-    return arr;
+// 2
+var lottoHelper = helper;
+
+function Ticket () {
+    this.id = 0;
+    this.numbers= [];
 }
 
-var sortArrayOfObjects = (arr) => {
-    for (let i = 0; i < arr.length - 1; i++)
-        for (let j = i + 1; j < arr.length; j++) 
-            if (arr[i].code < arr[j].code) {
-                var aux = arr[i];
-                arr[i] = arr[j];
-                arr[j] = aux;
+var sixOf49Game = {
+    tickerService: {
+        winningTicket: lottoHelper.get6RandomNumbersOf49(),
+        registeredTickets: [],
+        winnerTickets: {1: [], 2: [], 3: [], 4: [], 5: [], 6: []},
+
+        registerNTickets: (n) => {
+            while (n !== 0) {
+                var ticket = new Ticket();
+                ticket.id = lottoHelper.createUUID();
+                ticket.numbers = lottoHelper.get6RandomNumbersOf49();
+                sixOf49Game.tickerService.registeredTickets.push(ticket);
+                n--;
             }
-}
+        },
 
-var get6RandomNumbersOf49 = () => {
-    var arr = getArrayOfObjectsWith49RandomStrings();
-    sortArrayOfObjects(arr);
-    return arr.splice(0, 6).map(el => el.number);
+        getWinnerTickets: () => {
+            sixOf49Game.tickerService.registeredTickets.forEach(e1 => {
+                var count = 0;
+                e1.numbers.forEach(e2 => {
+                    sixOf49Game.tickerService.winningTicket.forEach(e3 => {
+                        if (e2 === e3)
+                            count++;
+                    })
+                })
+                if (count !== 0) {
+                    Object.getOwnPropertyDescriptor(sixOf49Game.tickerService.winnerTickets, count).value.push(e1);
+                    console.log(count + ' ' + e1.numbers);
+                }       
+            })
+        }
+    }
 }
-console.log(get6RandomNumbersOf49());
+sixOf49Game.tickerService.registerNTickets(50);
+console.log(sixOf49Game.tickerService.winningTicket);
+console.log(sixOf49Game.tickerService.registeredTickets);
+console.log(sixOf49Game.tickerService.winnerTickets);
+sixOf49Game.tickerService.getWinnerTickets();
