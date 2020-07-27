@@ -80,7 +80,7 @@ function Ticket () {
 
 var sixOf49Game = {
     tickerService: {
-        winningTicket: lottoHelper.get6RandomNumbersOf49(),
+        winningTicket: [14, 29, 33, 1, 21, 8],
         registeredTickets: [],
         winnerTickets: {1: [], 2: [], 3: [], 4: [], 5: [], 6: []},
 
