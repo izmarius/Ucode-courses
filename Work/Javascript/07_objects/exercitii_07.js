@@ -116,3 +116,15 @@ console.log(sixOf49Game.tickerService.winningTicket);
 console.log(sixOf49Game.tickerService.registeredTickets);
 console.log(sixOf49Game.tickerService.winnerTickets);
 sixOf49Game.tickerService.getWinnerTickets();
+
+// 4
+let getArrayOfNumberPairsWithSumEqualToN = (arr, n) => {
+    var resultArray = [];
+    for (let i = 0; i < arr.length - 1; i++)
+        for (let j = i + 1; j < arr.length; j++) 
+            arr[i] + arr[j] !== n ? resultArray : resultArray.push([arr[i], arr[j]]);
+    return resultArray;
+}
+console.log(getArrayOfNumberPairsWithSumEqualToN([1, 3, 2, 6, 5], 7));
+
+// 5
