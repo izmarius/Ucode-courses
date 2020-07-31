@@ -67,6 +67,16 @@ var helper = {
         var arr = helper.getArrayOfObjectsWith49RandomStrings();
         helper.sortArrayOfObjects(arr);
         return arr.splice(0, 6).map(el => el.number);
+    },
+
+    getRandomNumberBetweenZeroAndN: (n) => {
+        var randomNumber = Math.floor(Math.random() * (n));
+        return randomNumber;
+    },
+
+    getEmptyMatrixOfEqualSize: (size) => {
+        var matrix = Array(size).fill().map(() => Array(size).fill());
+        return matrix;
     }
 }
 
@@ -128,3 +138,32 @@ let getArrayOfNumberPairsWithSumEqualToN = (arr, n) => {
 console.log(getArrayOfNumberPairsWithSumEqualToN([1, 3, 2, 6, 5], 7));
 
 // 5
+let getMatrixOfEqualSizeWithRandomNumbersBelowN = (matrixSize, n) => {
+    var matrix = helper.getEmptyMatrixOfEqualSize(matrixSize);
+    for (let i = 0; i < matrix.length; i++)
+        for (let j = 0; j < matrix.length; j++) {
+            var randomNum = helper.getRandomNumberBetweenZeroAndN(n);
+            matrix[i][j] = randomNum;
+        }    
+    return matrix;
+}
+console.log(getMatrixOfEqualSizeWithRandomNumbersBelowN(3, 10));
+
+// 6, 7, 8, 9
+function Matrix (matrix) {
+    this.matrixService = {
+        getMatrix: () => {
+            return matrix;
+        },
+
+        getSum: () => {
+            var sum = matrix.reduce(((acc, el) => acc += el.reduce(((acc, el) => acc += el), 0)), 0)
+            return sum;
+        }
+    }
+}
+
+let mat1 = new Matrix(getMatrixOfEqualSizeWithRandomNumbersBelowN(3, 10));
+console.log(mat1.matrixService.getMatrix());
+
+console.log(mat1.matrixService.getSum());
