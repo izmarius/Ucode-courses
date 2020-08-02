@@ -149,7 +149,7 @@ let getMatrixOfEqualSizeWithRandomNumbersBelowN = (matrixSize, n) => {
 }
 console.log(getMatrixOfEqualSizeWithRandomNumbersBelowN(3, 10));
 
-// 6, 7, 8, 9
+// 6, 7, 8
 function Matrix (matrix) {
     this.matrixService = {
         getMatrix: () => {
@@ -159,6 +159,17 @@ function Matrix (matrix) {
         getSum: () => {
             var sum = matrix.reduce(((acc, el) => acc += el.reduce(((acc, el) => acc += el), 0)), 0)
             return sum;
+        },
+
+        getSumOfDiagonalNumbers: () => {
+            var sum = matrix.reduce(((acc, el1, i, arr1) => acc += el1.reduce(((acc, el2, j, arr2) => {
+                if (i == j)
+                    acc += el2;
+                if (i == (arr2.length - 1 - j))
+                    acc += el2;
+                return acc;
+            }), 0)), 0)
+            return sum;
         }
     }
 }
@@ -167,3 +178,25 @@ let mat1 = new Matrix(getMatrixOfEqualSizeWithRandomNumbersBelowN(3, 10));
 console.log(mat1.matrixService.getMatrix());
 
 console.log(mat1.matrixService.getSum());
+console.log(mat1.matrixService.getSumOfDiagonalNumbers());
+
+// 10
+var weekDayss = {
+    0: {name: 'uncheked', value: 0},
+    1: {name: 'Monday', value: 1},
+    2: {name: 'Teusday', value: 2},
+    4: {name: 'Wednesday', value: 4},
+    8: {name: 'Thursday', value: 8},
+    16: {name: 'Friday', value: 16},
+    32: {name: 'Saturday', value: 32},
+    64: {name: 'Sunday', value: 64}
+}
+let getDayOfTheWeek = (checkedBoxes, weekDays) => {
+    var selectedDays = [];
+    for (let i = 0; i < 7; i++) {
+        var c =  checkedBoxes[i];
+        (c & weekDays[c].value) === 0 ? selectedDays : selectedDays.push(weekDays[c].name);
+    }
+    return selectedDays;
+}
+console.log(getDayOfTheWeek([1, 2, 4, 8, 0, 0, 0], weekDayss));
