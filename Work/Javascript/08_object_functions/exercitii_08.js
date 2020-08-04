@@ -114,3 +114,37 @@ let getArrayOfDistinctValues = (arr) => {
 }
 
 console.log(getArrayOfDistinctValues([1, 2, 2, 2, 2]));
+
+// 8 
+let obj1 = {
+	zanzi: {test: 1},
+	ana: 10,
+	balet: 'duminica'
+};
+
+let getObjectSortedByKey = (obj) => {
+    var resultObj = {};
+    resultObj = Object.entries(obj).sort((a, b) => a[0].localeCompare(b[0]));
+    return Object.fromEntries(resultObj);
+}
+
+console.log(getObjectSortedByKey(obj1));
+
+// 9
+let numArr = [1, 2, 3, 4, 5, 6];
+
+let getArraySortedByBinaryRepresentation = (arr) => {
+    for (var i = 0; i < arr.length - 1; i++) {
+        var noOfOnesA = arr[i].toString(2).split('').filter(el => el !== '0').length;
+        for (var j = i + 1; j < arr.length; j++) {
+            var noOFOnesB = arr[j].toString(2).split('').filter(el => el !== '0').length;
+            if (noOfOnesA > noOFOnesB) {
+                var aux = arr[i];
+                arr[i] = arr[j];
+                arr[j] = aux;
+            }
+        }
+    }
+    return arr;
+}
+console.log(getArraySortedByBinaryRepresentation(numArr));
