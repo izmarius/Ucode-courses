@@ -1,0 +1,25 @@
+read and practice promises - get the examples from promises directory
+
+1. read and understand box model; 
+
+goover htmlelements -just read them and take a look
+
+inspect howasite is made; 
+
+go to bootsnipp.com and search forsome examples;inspect how do they do it
+also i've added the links_css file; go over links and check them;
+
+play that game with frog - flex
+
+check what's the difference between flex and flexbox grid
+
+search on google after css questions interview. put into a html file 50 of them
+
+create a css flex box menu: https://stackoverflow.com/questions/50986565/visual-studio-target-framework-missing
+i suggest to start with video 1 from "the net ninja"
+
+think to a page layout and try to create. 
+
+
+
+
