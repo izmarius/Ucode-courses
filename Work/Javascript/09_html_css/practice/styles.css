@@ -26,7 +26,7 @@ header {
     background-color: tomato;
     text-align: center;
     width: 100%;
-    padding: 20px;
+    padding: 20px 0;
     z-index: 1;
     top: 0;
     left: 0;
@@ -125,6 +125,10 @@ main article p {
     margin: 20px 5%;
 }
 
+.images li img {
+    max-width: 100%;
+}
+
 section.join {
     background-color: lightgrey;
     text-align: center;
@@ -149,4 +153,93 @@ footer {
     color: white;
     text-align: center;
     padding: 10px;
+}
+
+/* pseudo classes */
+
+nav li a:hover {
+    text-decoration: underline;
+}
+
+.images li:hover {
+    position: relative;
+    top: -4px;
+}
+
+form input:focus {
+    border: 4px solid tomato;
+    outline: none;
+}
+
+form input:valid {
+    border: 4px solid green;
+}
+
+p::selection {
+    background-color: tomato;
+    color: white;
+}
+
+/* media queries */
+
+@media screen and (max-width: 1400px) {
+    .banner .welcome h2 {
+        font-size: 60px;
+    }
+    
+    nav li {
+        font-size: 20px;
+    }
+
+}
+
+@media screen and (max-width: 960px) {
+    .banner .welcome h2 {
+        font-size: 40px;
+    }
+
+}
+
+@media screen and (max-width: 700px) {
+    .banner .welcome {
+        position: relative;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .banner .welcome h2 {
+        font-size: 25px;
+    }
+
+    .banner .welcome span {
+        font-size: 1em;
+    }
+
+    .banner .welcome br {
+        display: none;
+    }
+
+    .images {
+        flex-flow: column;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    nav {
+        top: 0;
+        padding: 0;
+    }
+    
+    nav ul {
+        flex-flow: column;
+    }
+    
+    nav li {
+        font-size: 20px;
+        margin: 12px 0;
+    }
+
+    header {
+        position: relative;
+    }
 }
