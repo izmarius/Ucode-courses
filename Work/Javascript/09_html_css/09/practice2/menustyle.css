@@ -48,8 +48,29 @@ a.fb {
 .social li {
     flex: 1;
 }
-/* flex style */
 
+/* grid flex style */
+
+#blocks {
+    margin: 10px;
+}
+
+article {
+    background-color: lightgrey;
+    margin-bottom: 10px;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+h2 {
+    margin: 5px 0;
+}
+
+p {
+    text-align: justify;
+}
+
+/* flex style */
 nav ul.social {
     flex: 1;
 }
@@ -70,6 +91,16 @@ nav ul.social {
 
     .social {
         margin: 0;
+    }
+
+    #blocks {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+    }
+
+    article {
+        flex: 0 1 32%;
     }
 
 }
