@@ -1,0 +1,13 @@
+1.take a look at javascript proxy
+2.swap 2 elements (a&b)
+3.preventdefault vs stoppropagation. 
+caut exemplu de todo
+
+5.get the 8786545^8909985 % 37
+6. linked list
+7. design pattern chain and factory method and abstract factory
+
+8: counter using react
+
+	1: https://codepen.io/mliq/pen/QjdrgX
+	2. https://www.youtube.com/watch?v=ZAXuxemjQXQ
