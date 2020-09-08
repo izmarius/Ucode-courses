@@ -400,4 +400,4 @@ console.log(getLongestWord(text));
 
 // 20
 const getASquaredBModC = (a, b, c) => a === 0 || b === 0 ? Math.pow(a, b) % c : getASquaredBModC(Math.floor(a / c), Math.floor(b / c), c);
-console.log(getASquaredBModC(2, 4, 2));
+console.log(getASquaredBModC(8786545, 8909985, 37));
