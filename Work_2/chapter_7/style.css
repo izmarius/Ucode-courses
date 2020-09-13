@@ -1,0 +1,28 @@
+body {
+    background: lightgrey;
+}
+
+form {
+    margin: 40px auto;
+    max-width: 200px;
+    padding: 10px;
+    background: white;
+}
+
+input {
+    display: block;
+    margin: 10px auto;
+    padding: 4px;
+}
+
+input:focus {
+    border: none;
+}
+
+.success {
+    border: 2px solid green;
+}
+
+.error {
+    border: 2px solid red;
+}
