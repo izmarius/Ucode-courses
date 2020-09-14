@@ -13,7 +13,7 @@
 const getCustomSequence = (num) => {
     let sequence = [];
     if (num === 1) {
-        sequence.push(1);
+        sequence.push(num);
         num = num * 3 + 1;
     }
     while (num !== 1) {
