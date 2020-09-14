@@ -56,12 +56,13 @@ console.log(ar);
 // 3
 let numArr = [1, 2, 3, 8];
 
-let getArraySortedByBinaryRepresentation = (arr) => {
+const getArraySortedByBinaryRepresentation = (arr) => {
+    arr = arr.sort((a, b) => b - a);
     for (var i = 0; i < arr.length - 1; i++) {
         var noOfOnesA = arr[i].toString(2).split('').filter(el => el !== '0').length;
         for (var j = i + 1; j < arr.length; j++) {
             var noOFOnesB = arr[j].toString(2).split('').filter(el => el !== '0').length;
-            if (noOfOnesA <= noOFOnesB) {
+            if (noOfOnesA < noOFOnesB) {
                 var aux = arr[i];
                 arr[i] = arr[j];
                 arr[j] = aux;
