@@ -1,3 +1,13 @@
+// 1. cea mai lunga secventa intr-un interval (text pb complet intr-o poza)
+
+// 2. se cere sa se tipareasca la consola valoarea folosita la apelul functiei push
+
+// 3. se cere sa se tipareasca la consola valoarea unei proprietati si noua valoare de fiecare data cand se modifica;
+
+// 4. sa se ordoneze un sir de numere  descrescator in functie de numarul de aparitii ale cifrei 1 din reprezentarea binara a numarului;
+// daca sunt mai multe numere care contin aceeasi valoare de numere de 1, acestea vor fi tiparite descrescator
+// [1,2,3,8] ==> [3, 8, 2, 1]
+
 // 1
 
 const getCustomSequence = (num) => {
@@ -30,3 +40,34 @@ const getMaxSequenceLengthInInterval = (i, j) => {
 };
 
 console.log(getMaxSequenceLengthInInterval(1,2));
+
+// 2
+
+Array.prototype.customPush = function (el) {
+    this.length++;
+    this[this.length - 1] = el;
+    return this;
+};
+
+let ar = [1, 2, 3];
+ar.customPush(10);
+console.log(ar);
+
+// 3
+let numArr = [1, 2, 3, 8];
+
+let getArraySortedByBinaryRepresentation = (arr) => {
+    for (var i = 0; i < arr.length - 1; i++) {
+        var noOfOnesA = arr[i].toString(2).split('').filter(el => el !== '0').length;
+        for (var j = i + 1; j < arr.length; j++) {
+            var noOFOnesB = arr[j].toString(2).split('').filter(el => el !== '0').length;
+            if (noOfOnesA <= noOFOnesB) {
+                var aux = arr[i];
+                arr[i] = arr[j];
+                arr[j] = aux;
+            }
+        }
+    }
+    return arr;
+}
+console.log(getArraySortedByBinaryRepresentation(numArr));
