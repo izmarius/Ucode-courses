@@ -2,7 +2,7 @@
 
 // 2. se cere sa se tipareasca la consola valoarea folosita la apelul functiei push
 
-// 4. sa se ordoneze un sir de numere  descrescator in functie de numarul de aparitii ale cifrei 1 din reprezentarea binara a numarului;
+// 3. sa se ordoneze un sir de numere  descrescator in functie de numarul de aparitii ale cifrei 1 din reprezentarea binara a numarului;
 // daca sunt mai multe numere care contin aceeasi valoare de numere de 1, acestea vor fi tiparite descrescator
 // [1,2,3,8] ==> [3, 8, 2, 1]
 
