@@ -6,6 +6,7 @@ function UserProfile(props) {
         <div>
             <h2>{props.user.name}</h2>
             <h3>{props.user.age}</h3>
+            <p>{props.user.email}</p>
         </div>
     );
 }
