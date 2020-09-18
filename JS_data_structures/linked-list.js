@@ -25,7 +25,6 @@ function LinkedList () {
 //create a linked list starting from  an array
 let array = [1, 3, 6, 7, 8, 10, 1];
 
-
 const getLinkedListFromArray = (arr) => {
     let linkedList = new LinkedList();
     while (arr.length !== 0) {
@@ -34,3 +33,20 @@ const getLinkedListFromArray = (arr) => {
     return linkedList;
 };
 console.log(getLinkedListFromArray(array));
+
+const converArrayIntoLinkedList = (arr) => {
+    let list = null;
+    let listSize = 0;
+    while (arr.length !== 0) {
+        list = {
+            data: arr.pop(),
+            next: list
+        };
+        listSize++;
+    }
+    list.length = listSize;
+    return list;
+};
+
+let a = [1, 2, 3];
+console.log(converArrayIntoLinkedList(a));
