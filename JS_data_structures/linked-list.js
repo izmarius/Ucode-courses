@@ -50,11 +50,26 @@ function LinkedList () {
         }
         return false;
     };
+
+    this.reverseList = () => {
+        let currentNode = this.head;
+        let previousNode = null;
+        let nextNode = null;
+        while (currentNode != null) {
+            nextNode = currentNode.next;
+            currentNode.next = previousNode;
+            previousNode = currentNode;
+            currentNode = nextNode;
+        }
+        this.head = previousNode;
+    };
 }
 
 //create a linked list starting from  an array
 // add and remove methods
-let array = [1, 3, 6, 7, 8, 10, 1];
+// reverse list method
+let array1 = [1, 3, 6, 7, 8, 10, 1];
+let array2 = [1, 2, 3, 4, 5];
 
 const getLinkedListFromArray = (arr) => {
     let linkedList = new LinkedList();
@@ -63,10 +78,16 @@ const getLinkedListFromArray = (arr) => {
     }
     return linkedList;
 };
-let linkedList1 = getLinkedListFromArray(array);
+
+//linked list 1
+let linkedList1 = getLinkedListFromArray(array1);
 console.log(linkedList1);
 linkedList1.remove(1);
 console.log(linkedList1);
+
+//linked list 2
+let linkedList2 = getLinkedListFromArray(array2);
+console.log(linkedList2);
 
 const converArrayIntoLinkedList = (arr) => {
     let list = null;
