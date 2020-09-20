@@ -20,9 +20,40 @@ function LinkedList () {
         }
         this.length++;
     };
+
+    this.remove = (data) => {
+        let currentNode = this.head;
+        let previousNode = null;
+        let includesData = this.includes(data);
+        if (includesData) {
+            if (currentNode.data === data) {
+                this.head = currentNode.next;
+            } else {
+                while (currentNode.data !== data) {
+                    previousNode = currentNode;
+                    currentNode = currentNode.next;
+                }
+                previousNode.next = currentNode.next;
+            }
+            this.length--;
+        }
+        return;
+    };
+
+    this.includes = (data) => {
+        let currentNode = this.head;
+        while (currentNode.next !== null) {
+            if (currentNode.data === data) {
+                return true;
+            }
+            currentNode = currentNode.next;
+        }
+        return false;
+    };
 }
 
 //create a linked list starting from  an array
+// add and remove methods
 let array = [1, 3, 6, 7, 8, 10, 1];
 
 const getLinkedListFromArray = (arr) => {
@@ -32,7 +63,10 @@ const getLinkedListFromArray = (arr) => {
     }
     return linkedList;
 };
-console.log(getLinkedListFromArray(array));
+let linkedList1 = getLinkedListFromArray(array);
+console.log(linkedList1);
+linkedList1.remove(1);
+console.log(linkedList1);
 
 const converArrayIntoLinkedList = (arr) => {
     let list = null;
