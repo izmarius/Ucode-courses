@@ -73,3 +73,31 @@ const getMostVisited = (markers) => {
     return mostVisited;
 }
 console.log(getMostVisited(markerList));
+
+
+// 1. [1,5,8,9,11,14,17,25,64,89]
+// - sa se returneze daca exista unnumar in array
+// - sa se returneze pozitia  uni numar in array
+
+const array1 = [1,5,8,9,11,14,17,25,64,89];
+
+const isNumberInArray = (arr, num) => {
+    return arr.includes(num);
+}
+
+const getIndexInSortedArray = (arr, target) => {
+    let left = 0;
+    let right = arr.length - 1;
+    while (left <= right) {
+        let mid = Math.floor((left + right) / 2);
+        if (arr[mid] === target) {
+            return mid;
+        } else if (arr[mid] < target) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+    return -1;
+}
+console.log(getIndexInSortedArray(array1, 14));
