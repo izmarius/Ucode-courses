@@ -99,7 +99,6 @@ const getIndexInSortedArray = (arr, target) => {
 };
 console.log(getIndexInSortedArray(array1, 14));
 
-
 // 2. pls create a binary treefroman array;
 // [1,8,52,17, 4, 78,6,11,91]
 
@@ -152,6 +151,24 @@ function BinaryTree() {
     }
     return true;
   };
+
+    this.getMaxDepth = () => {
+    let maxDepth = 0;
+    let DFS = (node) => {
+      if (node === null) {
+        return -1;
+      }
+      if (node.left !== null && node.right !== null) {
+        maxDepth++;
+      }
+      DFS(node.left);
+      DFS(node.right);
+    };
+    DFS(this.root);
+    return maxDepth;
+  };
+
+
 }
 
 let tree2 = new BinaryTree();
@@ -160,14 +177,26 @@ const array2 = [1, 8, 52, 17, 4, 78, 6, 11, 91];
 const convertArrayIntoBT = (arr, tree) => {
   const mid = Math.floor((0 + arr.length - 1) / 2);
   tree.root = {
-      data: arr[mid],
-      left: null,
-      right: null
+    data: arr[mid],
+    left: null,
+    right: null,
   };
   arr.forEach((el) => {
     tree.add(el);
   });
   return tree;
 };
-
 console.log(convertArrayIntoBT(array2, tree2));
+
+let tree3 = new BinaryTree();
+tree3.add(9);
+tree3.add(4);
+tree3.add(17);
+tree3.add(3);
+tree3.add(6);
+tree3.add(22);
+tree3.add(5);
+tree3.add(7);
+tree3.add(20);
+console.log(tree3);
+console.log(tree3.getMaxDepth());
