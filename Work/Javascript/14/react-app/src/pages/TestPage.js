@@ -1,11 +1,8 @@
 import React from 'react';
 import TestComp from '../components/TestComp';
 
-function TestPage () {
-    const [inputText, setText] = React.useState("");
-    const handleChange = (e) => {
-        setText(e.target.value);
-    };
+function TestPage (props) {
+    const {inputText, handleChange} = props;
 
     return (
         <div>
