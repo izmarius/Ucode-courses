@@ -8,39 +8,69 @@
 // console.log(3);
 // console.log(4);
 
-
 // HTTP Requests
 // get response data as json
 
-const getTodos = (callback) => {
-  const request = new XMLHttpRequest();
+const getTodos = (resource) => {
+  return new Promise((reseolve, reject) => {
+    const request = new XMLHttpRequest();
 
-  request.addEventListener("readystatechange", () => {
-    // console.log(request, request.readyState);
-    if (request.readyState === 4 && request.status === 200) {
-    //   console.log(request.responseText);
-    callback(undefined, request.responseText);
-    } else if (request.readyState === 4){
-    //   console.log("could not fetch data");
-    callback('could not fetch data', undefined);
-    }
+    request.addEventListener("readystatechange", () => {
+      if (request.readyState === 4 && request.status === 200) {
+        const data = JSON.parse(request.responseText);
+        reseolve(data);
+      } else if (request.readyState === 4) {
+        reject("error getting resource");
+      }
+    });
+
+    request.open("GET", resource);
+    request.send();
   });
-
-  request.open("GET", "https://jsonplaceholder.typicode.com/todos/1");
-  request.send();
 };
 
-console.log(1);
-console.log(2);
+getTodos("https://jsonplaceholder.typicode.com/todos/1")
+  .then((data) => {
+    console.log("promise 1 resolved:", data);
+    return getTodos("todos.json");
+  })
+  .then((data) => {
+    console.log("promise 2 resolved:", data);
+  })
+  .catch((err) => {
+    console.log("promise rejected:", err);
+  });
 
-getTodos((err, data) => {
-    console.log('callback fired');
-    if (err) {
-        console.log(err);
-    } else {
-        console.log(data);
-    }
-});
+// getTodos("https://jsonplaceholder.typicode.com/todos/1", (err, data) => {
+//   console.log("callback fired");
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     console.log(data);
+//   }
+// });
 
-console.log(3);
-console.log(4);
+// getTodos("todos.json", (err, data) => {
+//   console.log("callback fired");
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     console.log(data);
+//   }
+// });
+
+// promise example
+
+const getSomething = () => {
+  return new Promise((reseolve, reject) => {
+    // fetch something
+  });
+};
+
+getSomething()
+  .then((data) => {
+    console.log(data);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
