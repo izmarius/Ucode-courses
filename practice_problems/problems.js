@@ -154,5 +154,148 @@ const longestCommonPrefix = (strs) => {
   }
   return result;
 };
-console.log(longestCommonPrefix([]));
-// longestCommonPrefix(["flower","flow","flight"])
+console.log(
+  "longest common prefix: ",
+  longestCommonPrefix(["flower", "flow", "flight"])
+);
+
+/*Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+An input string is valid if:
+st be closed by the same type of brackets.
+Open brackets must be closed in the correct order.
+Input: s = "()[]{}"
+Output: true*/
+
+const isValid = (s) => {
+  const stack = [];
+  let n = stack.length;
+  if (s.length % 2 !== 0) {
+    return false;
+  }
+  for (let i = 0; i < s.length; i++) {
+    let symbol = s[i];
+    if (symbol === "{" || symbol === "[" || symbol === "(") {
+      stack.push(symbol);
+      n = stack.length;
+    } else if (symbol === "}" || symbol === "]" || symbol === ")") {
+      stack.unshift(symbol);
+      n = stack.length;
+    }
+    if (
+      (symbol === "}" && stack[n - 1] === "{") ||
+      (symbol === "]" && stack[n - 1] === "[") ||
+      (symbol === ")" && stack[n - 1] === "(")
+    ) {
+      stack.pop();
+      stack.shift();
+      n = stack.length;
+    }
+  }
+  if (n) {
+    return false;
+  }
+  return true;
+};
+console.log("is valid: ", isValid("([}}])"));
+
+/*Merge two sorted linked lists and return it as a new sorted list. The new list should be made by splicing together the nodes of the first two lists.
+Input: l1 = [1,2,4], l2 = [1,3,4]
+Output: [1,1,2,3,4,4]
+-100 <= Node.val <= 100*/
+
+function LinkedList() {
+  this.head = null;
+  this.length = 0;
+
+  function Node(data) {
+    this.data = data;
+    this.next = null;
+  }
+
+  this.add = (data) => {
+    this.head = this.addNode(this.head, data);
+    this.length++;
+  };
+
+  this.addNode = (node, data) => {
+    if (node === null) {
+      node = new Node(data);
+    } else {
+      node.next = this.addNode(node.next, data);
+    }
+    return node;
+  };
+};
+
+const addFromArrToList = (arr) => {
+  let list = new LinkedList();
+  arr.forEach((el) => {
+    list.add(el);
+  });
+  return list;
+};
+
+const mergeTwoList = (l1, l2) => {
+  l1 = addFromArrToList(l1);
+  l2 = addFromArrToList(l2);
+  let l3 = new LinkedList();
+  l3.add(-101);
+
+  let n1 = l1.head;
+  let n2 = l2.head;
+  let n3 = l3.head;
+
+  if (n1 === null) {
+    return l2;
+  }
+
+  if (n2 === null) {
+    return l1;
+  }
+
+  while (n1 !== null && n2 !== null) {
+
+    if (n2.data <= n1.data) {
+      let temp = n2.next;
+      n3.next = n2;
+      n2 = temp;
+    } else {
+      let temp = n1.next;
+      n3.next = n1;
+      n1 = temp;
+    }
+    n3 = n3.next;
+
+  }
+
+  if (n1 === null) {
+    n3.next = n2;
+  }
+  if (n2 === null) {
+    n3.next = n1;
+  }
+
+  return l3.head.next;
+};
+console.log('merged sorted list: ', mergeTwoList([1, 2, 3], [1, 2, 4]));
+
+/*Given a sorted array nums, remove the duplicates in-place such that each element appears only once and returns the new length.
+Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory. 
+
+Given nums = [1,1,2],
+Your function should return length = 2, with the first two elements of nums being 1 and 2 respectively.
+It doesn't matter what you leave beyond the returned length.
+*/
+
+const removeDuplicates = (nums) => {
+  let poz = 0;
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] !== nums[i+1]) {
+      nums[poz] = nums[i];
+      poz++;
+    }
+  }
+  nums.length = poz;
+  return nums.length;
+};
+console.log(removeDuplicates([0,0,1,1,1,2,2,3,3,4]));
