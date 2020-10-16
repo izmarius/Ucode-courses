@@ -304,7 +304,7 @@ console.log('remove duplicates arr-final-length: ', removeDuplicates([0,0,1,1,1,
 Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory. */
 
 const removeElement = (nums, val) => {
-  let poz  = 0;
+  let poz = 0;
   let n = nums.length;
   if (nums.length < 1) {
     return 0;
@@ -318,4 +318,29 @@ const removeElement = (nums, val) => {
   }
   return nums.length;
 };
-console.log(removeElement([3, 2, 2, 7, 8, 3, 3, 9, 3], 3));
+console.log('arr length after remove elem: ', removeElement([3, 2, 2, 7, 8, 3, 3, 9, 3], 3));
+
+/* Return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+For the purpose of this problem, we will return 0 when needle is an empty string. This is consistent to C's strstr() and Java's indexOf().*/
+
+const strStr = (haystack, needle) => {
+  if (!needle) {
+    return 0;
+  }
+
+  const needleSize = needle.length;
+  let poz = 0;
+  let partOfHaystack = haystack.substr(poz,needleSize);
+
+  while (partOfHaystack.length === needleSize) {
+    if (partOfHaystack === needle) {
+      return poz;
+    }
+    poz += 1;
+    partOfHaystack = haystack.substr(poz,needleSize);
+  }
+  
+  return -1;
+};
+
+console.log(strStr('mississippi','ippi'));
