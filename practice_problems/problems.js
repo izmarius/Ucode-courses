@@ -298,4 +298,24 @@ const removeDuplicates = (nums) => {
   nums.length = poz;
   return nums.length;
 };
-console.log(removeDuplicates([0,0,1,1,1,2,2,3,3,4]));
+console.log('remove duplicates arr-final-length: ', removeDuplicates([0,0,1,1,1,2,2,3,3,4]));
+
+/* Given an array nums and a value val, remove all instances of that value in-place and return the new length.
+Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory. */
+
+const removeElement = (nums, val) => {
+  let poz  = 0;
+  let n = nums.length;
+  if (nums.length < 1) {
+    return 0;
+  }
+  while (poz < n) {
+    let firstEl = nums.shift();
+    if (firstEl !== val) {
+      nums.push(firstEl);
+    }
+    poz++;
+  }
+  return nums.length;
+};
+console.log(removeElement([3, 2, 2, 7, 8, 3, 3, 9, 3], 3));
