@@ -342,5 +342,28 @@ const strStr = (haystack, needle) => {
   
   return -1;
 };
+console.log('strStr: ', strStr('mississippi','ippi'));
 
-console.log(strStr('mississippi','ippi'));
+/*Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.
+Input: nums = [1,3,5,6], target = 5
+Output: 2
+Input: nums = [1,3,5,6], target = 7
+Output: 1
+*/
+
+const searchInsert = (nums, target) => {
+  let left = 0;
+  let right = nums.length - 1;
+  while (left <= right) {
+    let mid = Math.floor((left + right) / 2);
+    if (nums[mid] === target) {
+      return mid;
+    } else if (nums[mid] < target) {
+      left = mid + 1;
+    } else {
+      right = mid - 1;
+    }
+  }
+  return right + 1;
+};
+console.log('search insert: ', searchInsert([1], 0));
