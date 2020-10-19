@@ -367,3 +367,49 @@ const searchInsert = (nums, target) => {
   return right + 1;
 };
 console.log('search insert: ', searchInsert([1], 0));
+
+/* Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.
+Input: nums = [-2,1,-3,4,-1,2,1,-5,4]
+Output: 6
+Explanation: [4,-1,2,1] has the largest sum = 6.*/
+
+const maxSubArray = (nums) => {
+  let maxSum = - (2 ** 31);
+  for (let i = 0; i < nums.length; i++) {
+    let sum = 0;
+    for (let j = i; j < nums.length; j++) {
+      sum += nums[j];
+      if (sum > maxSum) {
+        maxSum = sum;
+      }
+    }
+  }
+  return maxSum;
+};
+console.log(maxSubArray([0]));
+
+const maxSubArrayV2 = (nums) => {
+  let maxSum = - (2 ** 31);
+  let sum = 0;
+  let left = 0;
+  let right = nums.length - 1;
+  let mid = left;
+
+  while (left <= right) {
+    sum += nums[mid];
+
+    if (sum > maxSum) {
+      maxSum = sum;
+    }
+    
+    if (mid >= right) {
+      left++;
+      mid = left - 1;
+      sum = 0;
+    }
+
+    mid++;
+  }
+  return maxSum;
+};
+console.log(maxSubArrayV2([-2,-1]));
