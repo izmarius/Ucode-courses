@@ -6,9 +6,9 @@ const icon = document.querySelector(".icon img");
 
 const getTimeImageSrc = (weather) => {
   if (weather.IsDayTime) {
-    return 'img/day.svg';
+    return "img/day.svg";
   }
-  return 'img/night.svg';
+  return "img/night.svg";
 };
 
 const getIconSrc = (weather) => {
@@ -30,14 +30,14 @@ const updateUI = (data) => {
     </div>
     `;
 
-    //remove d-none class from card
-    if (card.classList.contains('d-none')) {
-        card.classList.remove('d-none');
-    }
+  //remove d-none class from card
+  if (card.classList.contains("d-none")) {
+    card.classList.remove("d-none");
+  }
 
-    //update night / day and icon images
-    time.setAttribute('src', getTimeImageSrc(cityWeather));
-    icon.setAttribute('src', getIconSrc(cityWeather));
+  //update night / day and icon images
+  time.setAttribute("src", getTimeImageSrc(cityWeather));
+  icon.setAttribute("src", getIconSrc(cityWeather));
 };
 
 const updateCity = async (city) => {
@@ -63,4 +63,19 @@ cityForm.addEventListener("submit", (e) => {
     .catch((err) => {
       console.log(err);
     });
+
+  localStorage.setItem("city", city);
+});
+
+window.addEventListener("load", () => {
+  let city = localStorage.getItem("city");
+  if (city) {
+    updateCity(city)
+      .then((data) => {
+        updateUI(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 });
